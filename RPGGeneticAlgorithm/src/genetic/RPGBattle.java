@@ -108,7 +108,7 @@ public class RPGBattle {
         hero.getATK() + " DEF: " + hero.getDEF() + " MAG: " + hero.getMAG() + " SPD: " + hero.getSPD());
         return true;
       } else {
-        hero.setFitness(boss.getDamage() + hero.getHealedHP());
+        hero.setFitness(boss.getDamage() + hero.getHealedHP() / 3);
       }
       boss.restore();
     }
