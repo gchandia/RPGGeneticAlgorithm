@@ -104,8 +104,8 @@ public class RPGBattle {
         bossStats = boss.getBaseStats();
         winnerSkill = hero.getSkill().getName();
         bossSkill = boss.getSkill().getName();
-        System.out.println(hero.getHP() + " " + hero.getMP() +  " " + 
-        hero.getATK() + " " + hero.getDEF() + " " + hero.getMAG() + " " + hero.getSPD());
+        System.out.println("Surviving stats\t" + "HP: " + hero.getHP() + " MP: " + hero.getMP() +  " ATK: " + 
+        hero.getATK() + " DEF: " + hero.getDEF() + " MAG: " + hero.getMAG() + " SPD: " + hero.getSPD());
         return true;
       } else {
         hero.setFitness(boss.getDamage() + hero.getHealedHP());
