@@ -9,6 +9,7 @@ import characters.Mage;
 import characters.Paladin;
 import characters.Warrior;
 import skills.Berserk;
+import skills.Heal;
 import skills.Spell;
 import skills.TripleHit;
 
@@ -80,13 +81,13 @@ public class RPGBattle {
       population[index++].setSkill(new TripleHit(10));
       
       population[index] = new Paladin(1500, 20, 100, 55, 40, 50);
-      population[index++].setSkill(new Berserk(10));
+      population[index++].setSkill(new Berserk(20));
       
       population[index] = new Mage(450, 150, 30, 20, 70, 70);
-      population[index++].setSkill(new Spell(10));
+      population[index++].setSkill(new Spell(5));
       
       population[index] = new Healer(400, 100, 10, 80, 90, 45);
-      population[index++].setSkill(new TripleHit(10));
+      population[index++].setSkill(new Heal(30));
     }
     return population;
   }
@@ -106,7 +107,7 @@ public class RPGBattle {
         hero.getATK() + " " + hero.getDEF() + " " + hero.getMAG() + " " + hero.getSPD());
         return true;
       } else {
-        hero.setFitness(boss.getDamage());
+        hero.setFitness(boss.getDamage() + hero.getHealedHP());
       }
       boss.restore();
     }
@@ -193,7 +194,7 @@ public class RPGBattle {
                           random.nextInt((500 - 300) + 1) + 300,
                           random.nextInt((500 - 300) + 1) + 300,
                           75);
-    chaos.setSkill(new TripleHit(10));
+    chaos.setSkill(new Heal(30));
     
     long startTime = System.currentTimeMillis();
     gene.geneticAlgorithm(25, chaos, null);

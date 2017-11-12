@@ -4,7 +4,7 @@ import java.util.Random;
 import skills.Skill;
 
 public abstract class AbstractHero implements Hero {
-  private int HP, MP, ATK, DEF, MAG, SPD, guardDEF, berATK;
+  private int HP, MP, ATK, DEF, MAG, SPD, guardDEF, berATK, healHP;
   private int bHP, bMP, bATK, bDEF, bMAG, bSPD;
   private int fitness;
   private double normalizedFitness;
@@ -48,7 +48,9 @@ public abstract class AbstractHero implements Hero {
   }
   
   public void increaseHP(int hp) {
-    HP += hp;
+    int oldHP = HP, newHP = HP + hp;
+    HP = newHP > bHP? bHP : newHP ;
+    healHP += newHP - oldHP;
   }
   
   public void decreaseHP(int hp) {
@@ -111,8 +113,10 @@ public abstract class AbstractHero implements Hero {
     berserking = true;
     berATK = ATK;
     ATK *= 4;
-    SPD -= Math.round(SPD * 0.2) < 10? 10 : Math.round(SPD * 0.2);
-    DEF -= Math.round(DEF * 0.2) < 10? 10 : Math.round(DEF * 0.2);
+    int spdFormula = (int) (SPD - Math.round(SPD * 0.1));
+    int defFormula = (int) (DEF - Math.round(DEF * 0.1));
+    SPD = spdFormula < 10? 10 : spdFormula;
+    DEF = defFormula < 10? 10 : defFormula;
   }
   
   public void unsetBerserk() {
@@ -122,6 +126,10 @@ public abstract class AbstractHero implements Hero {
   
   public int getDamage() {
     return bHP - HP;
+  }
+  
+  public int getHealedHP() {
+    return healHP;
   }
   
   public void restore() {

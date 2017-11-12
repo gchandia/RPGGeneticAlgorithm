@@ -25,6 +25,7 @@ public interface Hero {
   public void setBerserk();
   public void unsetBerserk();
   public int getDamage();
+  public int getHealedHP();
   public void restore();
   public int getFitness();
   public void setFitness(int fitness);
