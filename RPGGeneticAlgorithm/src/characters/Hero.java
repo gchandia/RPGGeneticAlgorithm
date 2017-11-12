@@ -1,5 +1,7 @@
 package characters;
 
+import skills.Skill;
+
 public interface Hero {
   public int getHP();
   public int getMP();
@@ -10,11 +12,14 @@ public interface Hero {
   public int[] getBaseStats();
   public void increaseHP(int hp);
   public void decreaseHP(int hp);
+  public void decreaseMP(int mp);
   public void attack(Hero enemy);
   public void getAttacked(int atk);
   public boolean isGuarding();
   public void setGuard();
   public void unsetGuard();
+  public void setSkill(Skill skill);
+  public Skill getSkill();
   public int getDamage();
   public void restore();
   public int getFitness();

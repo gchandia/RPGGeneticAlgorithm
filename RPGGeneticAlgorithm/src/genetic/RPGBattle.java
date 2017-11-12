@@ -8,6 +8,7 @@ import characters.Hero;
 import characters.Mage;
 import characters.Paladin;
 import characters.Warrior;
+import skills.TripleHit;
 
 public class RPGBattle {
   static Random random = new Random();
@@ -64,7 +65,7 @@ public class RPGBattle {
                       bestStats[3] + upStats[3] / 10,
                       bestStats[4] + upStats[4] / 10,
                       bestStats[5] + 1); //only increase speed by 1 each generation
-    
+    son.setSkill(bestParent.getSkill());
     return son;
   }
   
@@ -77,6 +78,9 @@ public class RPGBattle {
       population[index++] = new Mage(450, 150, 30, 20, 70, 70);
       population[index++] = new Healer(400, 100, 10, 80, 90, 45);
     }
+    for (Hero hero : population) {
+      hero.setSkill(new TripleHit(10));
+    }
     return population;
   }
   
@@ -84,7 +88,7 @@ public class RPGBattle {
     for (Hero hero : population) {
       Battle battle = new Battle(hero, boss);
       while (battle.notOver()) {
-        battle.turn(random.nextInt(2));
+        battle.turn(random.nextInt(3)); //0 = attack, 1 = guard, 2 = skill
       }
       if (battle.bossDefeated()) {
         winnerStats = hero.getBaseStats();
@@ -180,6 +184,7 @@ public class RPGBattle {
                           random.nextInt((500 - 300) + 1) + 300,
                           random.nextInt((500 - 300) + 1) + 300,
                           75);
+    chaos.setSkill(new TripleHit(10));
     
     long startTime = System.currentTimeMillis();
     gene.geneticAlgorithm(25, chaos, null);

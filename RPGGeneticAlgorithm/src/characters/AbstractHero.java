@@ -1,6 +1,7 @@
 package characters;
 
 import java.util.Random;
+import skills.Skill;
 
 public abstract class AbstractHero implements Hero {
   private int HP, MP, ATK, DEF, MAG, SPD, guardDEF;
@@ -8,6 +9,7 @@ public abstract class AbstractHero implements Hero {
   private int fitness;
   private double normalizedFitness;
   private boolean guarding = false;
+  private Skill skill;
   
   public AbstractHero(int hp, int mp, int atk, int def, int mag, int spd) {
     HP = hp > 9999? 9999 : hp; MP = mp > 999? 999 : mp; 
@@ -53,6 +55,10 @@ public abstract class AbstractHero implements Hero {
     HP -= hp;
   }
   
+  public void decreaseMP(int mp) {
+    MP -= mp;
+  }
+  
   public void attack(Hero enemy) {
     Random random = new Random();
     if (random.nextInt(101) <= this.SPD) {  //speed determines accuracy
@@ -79,6 +85,14 @@ public abstract class AbstractHero implements Hero {
   public void unsetGuard() {
     guarding = false;
     DEF = guardDEF;
+  }
+  
+  public void setSkill(Skill skill) {
+    this.skill = skill;
+  }
+  
+  public Skill getSkill() {
+    return skill;
   }
   
   public int getDamage() {

@@ -19,7 +19,7 @@ public class Battle {
   public void turn (int move) {
     if (move == 0) {attack();}
     else if (move == 1) {guard();}
-    else {}
+    else {skill();}
     switchTurn();
   }
   
@@ -44,5 +44,9 @@ public class Battle {
   
   public void guard() {
     current.setGuard();
+  }
+  
+  public void skill() {
+    current.getSkill().useSkill(current, this);
   }
 }
