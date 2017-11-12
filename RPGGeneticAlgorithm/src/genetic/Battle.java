@@ -54,4 +54,8 @@ public class Battle {
   public void skill() {
     current.getSkill().useSkill(current, this);
   }
+
+  public void castDoom() {
+    current.doom(opponent);
+  }
 }

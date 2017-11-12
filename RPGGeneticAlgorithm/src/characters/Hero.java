@@ -15,6 +15,7 @@ public interface Hero {
   public void decreaseMP(int mp);
   public void attack(Hero enemy);
   public void spell(Hero enemy);
+  public void doom(Hero enemy);
   public void getAttacked(int atk);
   public boolean isGuarding();
   public void setGuard();

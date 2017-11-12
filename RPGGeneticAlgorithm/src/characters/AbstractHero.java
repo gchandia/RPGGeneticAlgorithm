@@ -70,9 +70,13 @@ public abstract class AbstractHero implements Hero {
   
   public void spell(Hero enemy) {
     Random random = new Random();
-    if (random.nextInt(101) <= this.SPD) {
+    if (random.nextInt(201) <= this.SPD) { //double the chance to hit
       enemy.getAttacked(MAG);
     }
+  }
+  
+  public void doom(Hero enemy) {
+    enemy.getAttacked(2 * MAG);
   }
   
   public void getAttacked(int atk) {

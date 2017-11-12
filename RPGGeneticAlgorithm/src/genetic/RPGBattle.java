@@ -9,6 +9,7 @@ import characters.Mage;
 import characters.Paladin;
 import characters.Warrior;
 import skills.Berserk;
+import skills.Doom;
 import skills.Heal;
 import skills.Spell;
 import skills.TripleHit;
@@ -50,7 +51,6 @@ public class RPGBattle {
   }
   
   private Hero crossOver(Hero dad, Hero mom, int mutationRate) {
-    //TODO add mutationRate ability
     Hero bestParent, worstParent, son;
     int[] bestStats, upStats;
     
@@ -70,6 +70,7 @@ public class RPGBattle {
                       bestStats[4] + upStats[4] / 10,
                       bestStats[5] + 1); //only increase speed by 1 each generation
     son.setSkill(bestParent.getSkill());
+    if (random.nextInt(101) <= mutationRate) {son.setSkill(worstParent.getSkill());}
     return son;
   }
   
@@ -145,7 +146,7 @@ public class RPGBattle {
     while (filled < size) {
       Hero dad = fittest[random.nextInt(fittest.length)];
       Hero mom = fittest[random.nextInt(fittest.length)];
-      breed[filled++] = crossOver(dad, mom, 1);
+      breed[filled++] = crossOver(dad, mom, 5);
     }
     
     return breed;
@@ -194,7 +195,7 @@ public class RPGBattle {
                           random.nextInt((500 - 300) + 1) + 300,
                           random.nextInt((500 - 300) + 1) + 300,
                           75);
-    chaos.setSkill(new Heal(30));
+    chaos.setSkill(new Doom(40));
     
     long startTime = System.currentTimeMillis();
     gene.geneticAlgorithm(25, chaos, null);
