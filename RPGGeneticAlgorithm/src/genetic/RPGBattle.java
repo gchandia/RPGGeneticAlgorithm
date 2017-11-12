@@ -8,11 +8,14 @@ import characters.Hero;
 import characters.Mage;
 import characters.Paladin;
 import characters.Warrior;
+import skills.Berserk;
+import skills.Spell;
 import skills.TripleHit;
 
 public class RPGBattle {
   static Random random = new Random();
   static int[] winnerStats, bossStats;
+  static String winnerSkill, bossSkill;
   private int totalGenerations = 1;
   
   private int getFitnessSum(Hero[] population) {
@@ -73,13 +76,17 @@ public class RPGBattle {
     Hero[] population = new Hero[4 * size];
     int index = 0;
     for (int i = 0; i < size; i++) {
-      population[index++] = new Warrior(500, 50, 50, 50, 50, 55);
-      population[index++] = new Paladin(1500, 20, 100, 55, 40, 50);
-      population[index++] = new Mage(450, 150, 30, 20, 70, 70);
-      population[index++] = new Healer(400, 100, 10, 80, 90, 45);
-    }
-    for (Hero hero : population) {
-      hero.setSkill(new TripleHit(10));
+      population[index] = new Warrior(500, 50, 50, 50, 50, 55);
+      population[index++].setSkill(new TripleHit(10));
+      
+      population[index] = new Paladin(1500, 20, 100, 55, 40, 50);
+      population[index++].setSkill(new Berserk(10));
+      
+      population[index] = new Mage(450, 150, 30, 20, 70, 70);
+      population[index++].setSkill(new Spell(10));
+      
+      population[index] = new Healer(400, 100, 10, 80, 90, 45);
+      population[index++].setSkill(new TripleHit(10));
     }
     return population;
   }
@@ -93,6 +100,8 @@ public class RPGBattle {
       if (battle.bossDefeated()) {
         winnerStats = hero.getBaseStats();
         bossStats = boss.getBaseStats();
+        winnerSkill = hero.getSkill().getName();
+        bossSkill = boss.getSkill().getName();
         System.out.println(hero.getHP() + " " + hero.getMP() +  " " + 
         hero.getATK() + " " + hero.getDEF() + " " + hero.getMAG() + " " + hero.getSPD());
         return true;
@@ -196,9 +205,11 @@ public class RPGBattle {
     System.out.println("HP: " + winnerStats[0] + "\t" + "MP: " + winnerStats[1]);
     System.out.println("ATK: " + winnerStats[2] + "\t" + "DEF: " + winnerStats[3]);
     System.out.println("MAG: " + winnerStats[4] + "\t" + "SPD: " + winnerStats[5]);
+    System.out.println("Their skill was: " + winnerSkill);
     System.out.println("The villain's stats were:");
     System.out.println("HP: " + bossStats[0] + "\t" + "MP: " + bossStats[1]);
     System.out.println("ATK: " + bossStats[2] + "\t" + "DEF: " + bossStats[3]);
     System.out.println("MAG: " + bossStats[4] + "\t" + "SPD: " + bossStats[5]);
+    System.out.println("Their skill was: " + bossSkill);
   }
 }

@@ -4,11 +4,11 @@ import java.util.Random;
 import skills.Skill;
 
 public abstract class AbstractHero implements Hero {
-  private int HP, MP, ATK, DEF, MAG, SPD, guardDEF;
+  private int HP, MP, ATK, DEF, MAG, SPD, guardDEF, berATK;
   private int bHP, bMP, bATK, bDEF, bMAG, bSPD;
   private int fitness;
   private double normalizedFitness;
-  private boolean guarding = false;
+  private boolean guarding = false, berserking = false;
   private Skill skill;
   
   public AbstractHero(int hp, int mp, int atk, int def, int mag, int spd) {
@@ -66,6 +66,13 @@ public abstract class AbstractHero implements Hero {
     }
   }
   
+  public void spell(Hero enemy) {
+    Random random = new Random();
+    if (random.nextInt(101) <= this.SPD) {
+      enemy.getAttacked(MAG);
+    }
+  }
+  
   public void getAttacked(int atk) {
     int formula = 4 * atk - 2 * DEF;
     decreaseHP(formula <= 0? 1 : formula);
@@ -93,6 +100,24 @@ public abstract class AbstractHero implements Hero {
   
   public Skill getSkill() {
     return skill;
+  }
+  
+  public boolean isBerserking() {
+    return berserking;
+  }
+  
+  public void setBerserk() {
+    if (berserking) {return;}
+    berserking = true;
+    berATK = ATK;
+    ATK *= 4;
+    SPD -= Math.round(SPD * 0.2) < 10? 10 : Math.round(SPD * 0.2);
+    DEF -= Math.round(DEF * 0.2) < 10? 10 : Math.round(DEF * 0.2);
+  }
+  
+  public void unsetBerserk() {
+    berserking = false;
+    ATK = berATK;
   }
   
   public int getDamage() {

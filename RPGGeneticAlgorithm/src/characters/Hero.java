@@ -14,12 +14,16 @@ public interface Hero {
   public void decreaseHP(int hp);
   public void decreaseMP(int mp);
   public void attack(Hero enemy);
+  public void spell(Hero enemy);
   public void getAttacked(int atk);
   public boolean isGuarding();
   public void setGuard();
   public void unsetGuard();
   public void setSkill(Skill skill);
   public Skill getSkill();
+  public boolean isBerserking();
+  public void setBerserk();
+  public void unsetBerserk();
   public int getDamage();
   public void restore();
   public int getFitness();

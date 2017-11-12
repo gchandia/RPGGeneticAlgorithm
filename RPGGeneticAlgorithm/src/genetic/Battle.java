@@ -40,6 +40,11 @@ public class Battle {
   public void attack() {
     if (current.isGuarding()) {current.unsetGuard();}
     current.attack(opponent);
+    if (current.isBerserking()) {current.unsetBerserk();}
+  }
+  
+  public void spell() {
+    if (current.isGuarding()) {current.unsetGuard();}
   }
   
   public void guard() {

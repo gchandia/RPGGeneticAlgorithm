@@ -3,11 +3,11 @@ package skills;
 import characters.Hero;
 import genetic.Battle;
 
-public class TripleHit implements Skill {
-  private String name = "Triple hit";
+public class Spell implements Skill {
+  private String name = "Spell";
   private int mpCost;
   
-  public TripleHit(int cost) {
+  public Spell(int cost) {
     mpCost = cost;
   }
   
@@ -17,9 +17,7 @@ public class TripleHit implements Skill {
   
   public void useSkill(Hero hero, Battle battle) {
     if (hero.getMP() < mpCost) {return;}
-    battle.attack();
-    battle.attack();
-    battle.attack();
+    battle.spell();
     hero.decreaseMP(mpCost);
   }
 }
