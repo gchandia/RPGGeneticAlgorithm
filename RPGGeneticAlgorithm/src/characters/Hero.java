@@ -12,6 +12,9 @@ public interface Hero {
   public void decreaseHP(int hp);
   public void attack(Hero enemy);
   public void getAttacked(int atk);
+  public boolean isGuarding();
+  public void setGuard();
+  public void unsetGuard();
   public int getDamage();
   public void restore();
   public int getFitness();

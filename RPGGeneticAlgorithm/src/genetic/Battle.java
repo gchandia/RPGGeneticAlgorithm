@@ -17,8 +17,8 @@ public class Battle {
   }
   
   public void turn (int move) {
-    if (move == 0) {current.attack(opponent);}
-    else if (move == 1) {}
+    if (move == 0) {attack();}
+    else if (move == 1) {guard();}
     else {}
     switchTurn();
   }
@@ -35,5 +35,14 @@ public class Battle {
   
   public boolean bossDefeated() {
     return boss.getHP() <= 0;
+  }
+  
+  public void attack() {
+    if (current.isGuarding()) {current.unsetGuard();}
+    current.attack(opponent);
+  }
+  
+  public void guard() {
+    current.setGuard();
   }
 }

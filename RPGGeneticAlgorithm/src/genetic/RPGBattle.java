@@ -84,11 +84,13 @@ public class RPGBattle {
     for (Hero hero : population) {
       Battle battle = new Battle(hero, boss);
       while (battle.notOver()) {
-        battle.turn(0);
+        battle.turn(random.nextInt(2));
       }
       if (battle.bossDefeated()) {
         winnerStats = hero.getBaseStats();
         bossStats = boss.getBaseStats();
+        System.out.println(hero.getHP() + " " + hero.getMP() +  " " + 
+        hero.getATK() + " " + hero.getDEF() + " " + hero.getMAG() + " " + hero.getSPD());
         return true;
       } else {
         hero.setFitness(boss.getDamage());
